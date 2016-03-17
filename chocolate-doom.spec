@@ -1,12 +1,11 @@
 Summary:	Historically compatible Doom engine
 Name:		chocolate-doom
-Version:	2.2.0
+Version:	2.2.1
 Release:	1
 License:	GPL v2+
 Group:		Applications/Games
 Source0:	http://www.chocolate-doom.org/downloads/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	8b32745d113f25fd0985a03a5d632ba5
-Source1:	%{name}.appdata.xml
+# Source0-md5:	20ef24c517f701023aa187c07b587ce6
 URL:		http://chocolate-doom.org/
 BuildRequires:	SDL-devel
 BuildRequires:	SDL_mixer-devel
@@ -48,10 +47,9 @@ rm -rf docs
 install -d docs
 mv $RPM_BUILD_ROOT%{_docdir}/chocolate-{doom,heretic,hexen,strife} docs
 
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/appdata}
+install -d $RPM_BUILD_ROOT%{_bindir}
 mv $RPM_BUILD_ROOT%{_prefix}/games/* $RPM_BUILD_ROOT%{_bindir}
 
-cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/appdata/%{name}.appdata.xml
 desktop-file-validate $RPM_BUILD_ROOT%{_desktopdir}/chocolate-heretic.desktop
 desktop-file-validate $RPM_BUILD_ROOT%{_desktopdir}/chocolate-hexen.desktop
 desktop-file-validate $RPM_BUILD_ROOT%{_desktopdir}/chocolate-strife.desktop
