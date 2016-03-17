@@ -8,12 +8,13 @@ Source0:	http://www.chocolate-doom.org/downloads/%{version}/%{name}-%{version}.t
 # Source0-md5:	8b32745d113f25fd0985a03a5d632ba5
 Source1:	%{name}.appdata.xml
 URL:		http://chocolate-doom.org/
-BuildRequires:	%{__python}
 BuildRequires:	SDL-devel
 BuildRequires:	SDL_mixer-devel
 BuildRequires:	SDL_net-devel
 BuildRequires:	desktop-file-utils
 BuildRequires:	libsamplerate-devel
+BuildRequires:	python
+BuildRequires:	python-modules
 Requires:	desktop-file-utils
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
