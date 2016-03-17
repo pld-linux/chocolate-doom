@@ -1,7 +1,7 @@
 Summary:	Historically compatible Doom engine
 Name:		chocolate-doom
 Version:	2.2.0
-Release:	0.1
+Release:	1
 License:	GPL v2+
 Group:		Applications/Games
 Source0:	http://www.chocolate-doom.org/downloads/%{version}/%{name}-%{version}.tar.gz
@@ -38,8 +38,11 @@ the 1990s.
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	iconsdir=%{_iconsdir}/hicolor/64x64/apps \
-	docdir=%{_docdir} \
 	DESTDIR=$RPM_BUILD_ROOT
+
+rm -rf docs
+install -d docs
+mv $RPM_BUILD_ROOT/usr/share/doc/chocolate-{doom,heretic,hexen,strife} docs
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/appdata}
 mv $RPM_BUILD_ROOT%{_prefix}/games/* $RPM_BUILD_ROOT%{_bindir}
@@ -56,11 +59,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog NEWS NOT-BUGS README
-%if 0
-%doc %{_docdir}/chocolate-heretic
-%doc %{_docdir}/chocolate-hexen
-%doc %{_docdir}/chocolate-strife
-%endif
+%doc docs/*
 %attr(755,root,root) %{_bindir}/chocolate-doom
 %attr(755,root,root) %{_bindir}/chocolate-server
 %attr(755,root,root) %{_bindir}/chocolate-doom-setup
