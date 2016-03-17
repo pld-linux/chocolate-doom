@@ -14,6 +14,9 @@ BuildRequires:	SDL_mixer-devel
 BuildRequires:	SDL_net-devel
 BuildRequires:	desktop-file-utils
 BuildRequires:	libsamplerate-devel
+Requires:	desktop-file-utils
+Requires:	gtk-update-icon-cache
+Requires:	hicolor-icon-theme
 Provides:	bundled(md5-plumb)
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -42,7 +45,7 @@ rm -rf $RPM_BUILD_ROOT
 
 rm -rf docs
 install -d docs
-mv $RPM_BUILD_ROOT/usr/share/doc/chocolate-{doom,heretic,hexen,strife} docs
+mv $RPM_BUILD_ROOT%{_docdir}/chocolate-{doom,heretic,hexen,strife} docs
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/appdata}
 mv $RPM_BUILD_ROOT%{_prefix}/games/* $RPM_BUILD_ROOT%{_bindir}
@@ -55,6 +58,14 @@ desktop-file-validate $RPM_BUILD_ROOT%{_desktopdir}/screensavers/chocolate-doom-
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+%update_desktop_database
+%update_icon_cache hicolor
+
+%postun
+%update_desktop_database
+%update_icon_cache hicolor
 
 %files
 %defattr(644,root,root,755)
@@ -76,8 +87,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/chocolate-heretic.desktop
 %{_desktopdir}/chocolate-hexen.desktop
 %{_desktopdir}/chocolate-strife.desktop
-%{_iconsdir}/hicolor/64x64/apps/chocolate-doom.png
-%{_iconsdir}/hicolor/64x64/apps/chocolate-setup.png
+%{_iconsdir}/hicolor/*/apps/chocolate-doom.png
+%{_iconsdir}/hicolor/*/apps/chocolate-setup.png
 %{_mandir}/man5/chocolate-doom.cfg.5*
 %{_mandir}/man5/chocolate-heretic.cfg.5*
 %{_mandir}/man5/chocolate-hexen.cfg.5*
